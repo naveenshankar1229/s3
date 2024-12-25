@@ -20,13 +20,13 @@ resource "aws_s3_bucket_policy" "navpolicy" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "Stmt1735014264642",
+      "Sid": "PublicReadGetObject",
       "Action": [
         "s3:GetObject",
         "s3:GetObjectVersion"
       ],
       "Effect": "Allow",
-      "Resource": "${aws_s3_bucket.nav.arn}/*"
+      "Resource": "${aws_s3_bucket.nav.arn}/*",
       "Principal": "*"
     }
   ]
@@ -38,6 +38,7 @@ resource "aws_s3_bucket_policy" "navpolicy" {
 resource "aws_s3_object" "objects" {
   bucket = aws_s3_bucket.nav.id
   key = "Seattle.jpg"
-  source = "C:\\Users\\navee\\Downloads\\Seattle.jpg"
+  source = var.object_path
+  content_type = "image/jpeg"
 
 }
